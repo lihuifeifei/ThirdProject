@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加</title>
+</head>
+<body>
+<table id="employeeTable">
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Salary</th>
+        <th>&nbsp;</th>
+    </tr>
+    <tr class="delete">
+        <td>Tom</td>
+        <td>tom@tom.com</td>
+        <td>5000</td>
+        <td><a href="#">Delect</a></td>
+    </tr>
+    <tr class="delete">
+        <td>Jerry</td>
+        <td>jerry@sohu.com</td>
+        <td>8000</td>
+        <td><a href="#">Delect</a></td>
+    </tr>
+    <tr class="delete">
+        <td>Bob</td>
+        <td>Bob@tom.com</td>
+        <td>10000</td>
+        <td><a href="#">Delect</a></td>
+    </tr>
+</table>
+
+<div id="formDiv">
+
+    <h4>添加新员工</h4>
+    <table>
+        <tr>
+            <td class="word">name:</td>
+            <td class="inp">
+                <input type="text" name="empName" id="empName"/>
+            </td>
+        </tr>
+        <tr>
+            <td class="word">email:</td>
+            <td class="inp">
+                <input type="text" name="email" id="email"/>
+            </td>
+        </tr>
+        <tr>
+            <td class="word">salary:</td>
+            <td class="inp">
+                <input type="text" name="salary" id="salary"/>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <button id="addEmpButton" value="abc">
+                    Sublime
+                </button>
+            </td>
+        </tr>
+    </table>
+
+</div>
+
+
+</body>
+
+<script type="text/javascript">
+    window.onload = function () {
+        _delete();
+        _add();
+        function _delete () {
+            var allA = document.getElementsByClassName("delete");
+            for (var i = 0; i < allA.length; i++) {
+                allA[ i ].onclick = function () {
+                    var name = this.getElementsByTagName("td")[ 0 ].innerText;
+                    var flag = confirm("确认删除" + name + "?");
+                    if (flag) {
+                        this.parentNode.removeChild(this);
+                    }
+                    return false;
+                }
+            }
+        }
+
+        function _add () {
+            var addBtn = document.getElementById("addEmpButton");
+            addBtn.onclick = function () {
+                var empName = document.getElementById("empName").value;
+                var email = document.getElementById("email").value;
+                var salary = document.getElementById("salary").value;
+                var content =
+                    '<td>' + empName + '</td>' +
+                    '<td>' + email + '</td>' +
+                    ' <td>' + salary + '</td>' +
+                    '<td><a href="#">Delect</a></td>';
+                var tr = document.createElement('tr');
+                tr.className = "delete";
+                tr.innerHTML = content;
+                var parentNode = document.getElementById("employeeTable");
+                parentNode.appendChild(tr);
+                _delete();
+            }
+        }
+
+
+    }
+
+</script>
+</html>
